@@ -1,0 +1,44 @@
+# Intuition
+<!-- Describe your first thoughts on how to solve this problem. -->
+
+# Approach
+<!-- Describe your approach to solving the problem. -->
+
+# Complexity
+- Time complexity:
+<!-- Add your time complexity here, e.g. $$O(n)$$ -->
+
+- Space complexity:
+<!-- Add your space complexity here, e.g. $$O(n)$$ -->
+
+# Code
+```
+class Solution {
+public:
+    // Function to calculate the minimum number of pushes required.
+    int minimumPushes(string word) {
+        // Create a vector to store frequency of each letter in the 'word'.
+        vector<int> frequency(26, 0);
+        // Increment the frequency count for each letter in the 'word'.
+        for (char& c : word) {
+            ++frequency[c - 'a'];
+        }
+      
+        // Sort the frequency vector in descending order to prioritize letters with a higher frequency.
+        sort(frequency.rbegin(), frequency.rend());
+      
+        // Initialize a variable to store the total number of pushes.
+        int totalPushes = 0;
+        // Loop through the frequency vector to calculate the pushes for each letter.
+        for (int i = 0; i < 26; ++i) {
+            // The number of times a button needs to be pushed is determined by its position in the frequency vector.
+            // (i / 8 + 1) gives the tier of the button (1st-8th, 9th-16th, etc.).
+            // Multiply the tier by the frequency of the letter to get the pushes for that letter.
+            totalPushes += (i / 8 + 1) * frequency[i];
+        }
+      
+        // Return the total number of pushes required.
+        return totalPushes;
+    }
+};
+```
